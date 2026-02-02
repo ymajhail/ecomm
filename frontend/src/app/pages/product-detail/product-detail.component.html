@@ -1,0 +1,62 @@
+<div class="product-detail-page" *ngIf="product; else loading">
+    <div class="container">
+      <a routerLink="/products" class="back-link">← Back to Products</a>
+      
+      <div class="product-detail">
+        <div class="product-image-section">
+          <img [src]="product.imageUrl" [alt]="product.name" />
+        </div>
+        
+        <div class="product-details-section">
+          <span class="product-category">{{ product.category }}</span>
+          <h1 class="product-name">{{ product.name }}</h1>
+          <p class="product-brand">by {{ product.brand }}</p>
+          
+          <div class="product-price-section">
+            <span class="price">${{ product.price.toFixed(2) }}</span>
+            <span class="stock" [class.low-stock]="product.stock < 10">
+              {{ product.stock }} in stock
+            </span>
+          </div>
+
+          <p class="product-description">{{ product.description }}</p>
+
+          <div class="product-actions">
+            <div class="quantity-selector">
+              <button (click)="decreaseQuantity()" [disabled]="quantity <= 1">-</button>
+              <span>{{ quantity }}</span>
+              <button (click)="increaseQuantity()" [disabled]="quantity >= product.stock">+</button>
+            </div>
+            
+            <button 
+              class="btn btn-primary add-to-cart-btn"
+              (click)="addToCart()"
+              [disabled]="product.stock === 0">
+              Add to Cart
+            </button>
+          </div>
+
+          <div class="product-features">
+            <div class="feature">
+              <span class="feature-icon">✓</span>
+              <span>Premium Quality</span>
+            </div>
+            <div class="feature">
+              <span class="feature-icon">🚚</span>
+              <span>Free Shipping</span>
+            </div>
+            <div class="feature">
+              <span class="feature-icon">↩️</span>
+              <span>30-Day Returns</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <div class="loading">
+      <div class="spinner"></div>
+    </div>
+  </ng-template>

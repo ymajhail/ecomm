@@ -195,9 +195,15 @@ export class ProductDetailComponent implements OnInit {
         next: (product) => {
           this.product = product;
           this.quantity = Math.min(1, product.stock);
+          console.log('Product loaded:', product);
         },
-        error: (err) => console.error('Error loading product:', err)
+        error: (err) => {
+          console.error('Error loading product:', err);
+          alert('Failed to load product. Please make sure the backend server is running.');
+        }
       });
+    } else {
+      console.error('No product ID provided');
     }
   }
 

@@ -1,0 +1,63 @@
+<section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Your Health, Our Priority</h1>
+        <p class="hero-subtitle">Discover premium health products and supplements for a better you</p>
+        <a routerLink="/products" class="btn btn-primary">Shop Now</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-products">
+    <div class="container">
+      <h2 class="section-title">Featured Products</h2>
+      <div class="products-grid" *ngIf="products.length > 0; else loading">
+        <div class="product-card" *ngFor="let product of products.slice(0, 6)" [routerLink]="['/products', product.id]" style="cursor: pointer;">
+          <div class="product-image">
+            <img [src]="product.imageUrl" [alt]="product.name" />
+          </div>
+          <div class="product-info">
+            <span class="product-category">{{ product.category }}</span>
+            <h3 class="product-name">{{ product.name }}</h3>
+            <p class="product-brand">{{ product.brand }}</p>
+            <div class="product-footer">
+              <span class="product-price">${{ product.price.toFixed(2) }}</span>
+              <a [routerLink]="['/products', product.id]" class="btn btn-primary btn-sm" (click)="$event.stopPropagation()">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #loading>
+        <div class="loading">
+          <div class="spinner"></div>
+        </div>
+      </ng-template>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <div class="features-grid">
+        <div class="feature">
+          <div class="feature-icon">🚚</div>
+          <h3>Free Shipping</h3>
+          <p>On orders over $50</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">✓</div>
+          <h3>Quality Guaranteed</h3>
+          <p>Premium products only</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">💳</div>
+          <h3>Secure Payment</h3>
+          <p>Safe and encrypted</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">↩️</div>
+          <h3>Easy Returns</h3>
+          <p>30-day return policy</p>
+        </div>
+      </div>
+    </div>
+  </section>

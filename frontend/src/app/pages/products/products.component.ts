@@ -173,8 +173,14 @@ export class ProductsComponent implements OnInit {
   loadProducts(): void {
     const category = this.selectedCategory || undefined;
     this.apiService.getProducts(category).subscribe({
-      next: (products) => this.products = products,
-      error: (err) => console.error('Error loading products:', err)
+      next: (products) => {
+        this.products = products;
+        console.log('Products loaded:', products.length);
+      },
+      error: (err) => {
+        console.error('Error loading products:', err);
+        alert('Failed to load products. Please make sure the backend server is running.');
+      }
     });
   }
 
